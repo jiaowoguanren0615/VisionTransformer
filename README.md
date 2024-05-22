@@ -61,7 +61,8 @@ You can use anther optimizer Adafactor, just need to change the optimizer in ___
 ### Transfer Learning:
 Step 1: Write the ___pre-training weight path___ into the ___args.fintune___ in string format.  
 Step 2: Modify the ___args.freeze_layers___ according to your own GPU memory. If you don't have enough memory, you can set this to True to freeze the weights of the remaining layers except the last layer of classification-head without updating the parameters. If you have enough memory, you can set this to False and not freeze the model weights.  
-Here is an example for setting parameters:
+
+#### Here is an example for setting parameters:
 ![image](https://github.com/jiaowoguanren0615/VisionTransformer/blob/main/sample_png/transfer_learning.jpg)
 
 
