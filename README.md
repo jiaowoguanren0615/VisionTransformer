@@ -7,6 +7,8 @@
 This is a warehouse for ViT-Pytorch-model, can be used to train your image-datasets for vision tasks.    
 
 ![image](https://production-media.paperswithcode.com/methods/Screen_Shot_2021-01-26_at_9.43.31_PM_uI4jjMq.png)  
+![image](https://github.com/jiaowoguanren0615/VisionTransformer/blob/main/sample_png/vit-family-table.jpg)  
+![image](https://github.com/jiaowoguanren0615/VisionTransformer/blob/main/sample_png/vit-e_architechture.jpg)  
 
 ## Preparation
 ### Download the dataset: 
