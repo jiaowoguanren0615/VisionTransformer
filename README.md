@@ -32,6 +32,7 @@
     ├──other_files: Construct lr_schedulers (cosine_lr, poly_lr, multistep_lr, etc)
 ├── util:
     ├── engine.py: Function code for a training/validation process
+    ├── LBFGS_optimizer.py: Define LBFGS_optimizer for training KAN Network  
     ├── losses.py: Knowledge distillation loss, combined with teacher model (if any)
     ├── lr_decay.py: Define "inverse_sqrt_lr_decay" function for "Adafactor" optimizer
     ├── lr_sched.py: Define "adjust_learning_rate" function
