@@ -25,7 +25,7 @@
     ├── threeaugment.py: Additional data augmentation methods
 ├── models: VisionTransformer Model
     ├── build_models.py: Construct VisionTransformer models
-    ├── registry.py: Define some help-functions
+    ├── kan_model.py: Define KAN model replaces MLP layers
 ├── scheduler:
     ├──scheduler_main.py: Fundamental Scheduler module
     ├──scheduler_factory.py: Create lr_scheduler methods according to parameters what you set
