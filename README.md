@@ -14,6 +14,11 @@
 ![image](https://github.com/jiaowoguanren0615/VisionTransformer/blob/main/sample_png/vit-e_architechture.jpg)  
 
 ## Preparation
+### Create conda virtual-environment
+```bash
+conda env create -f environment.yml
+```
+
 ### Download the dataset: 
 [flower_dataset](https://www.kaggle.com/datasets/alxmamaev/flowers-recognition).  
 
