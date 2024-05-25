@@ -8,7 +8,7 @@
 ### [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)  
 ### [Adafactor: Adaptive Learning Rates with Sublinear Memory Cost](https://proceedings.mlr.press/v80/shazeer18a/shazeer18a.pdf)   
 
-![image](https://private-user-images.githubusercontent.com/23551623/326219527-695adc2d-0d0b-4e4b-bcff-db2c8070f841.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTY0MjU2MjMsIm5iZiI6MTcxNjQyNTMyMywicGF0aCI6Ii8yMzU1MTYyMy8zMjYyMTk1MjctNjk1YWRjMmQtMGQwYi00ZTRiLWJjZmYtZGIyYzgwNzBmODQxLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA1MjMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNTIzVDAwNDg0M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTY5MDkxN2MxNTczYWUwNThiMGJkMzllYWY3N2RjNjYyMmEwYzlkMjM3ZjA0ZDg4MWY2NDIwY2Q3YTMwODkzY2EmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.HUq6qaoopz3arw-P3v_KTBp6jIOzIFSAtzXbZHmbAZQ)  
+![image](https://github.com/jiaowoguanren0615/VisionTransformer/blob/main/sample_png/KAN-model.jpg)  
 ![image](https://production-media.paperswithcode.com/methods/Screen_Shot_2021-01-26_at_9.43.31_PM_uI4jjMq.png)  
 ![image](https://github.com/jiaowoguanren0615/VisionTransformer/blob/main/sample_png/vit-family-table.jpg)  
 ![image](https://github.com/jiaowoguanren0615/VisionTransformer/blob/main/sample_png/vit-e_architechture.jpg)  
