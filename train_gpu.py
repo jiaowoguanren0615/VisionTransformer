@@ -46,7 +46,7 @@ from datasets.threeaugment import new_data_aug_generator
 
 from models import *
 
-from estimate_model import Predictor, Plot_ROC
+from estimate_model import Predictor, Plot_ROC, OptAUC
 
 
 def get_args_parser():
@@ -55,6 +55,7 @@ def get_args_parser():
     parser.add_argument('--batch-size', default=16, type=int)
     parser.add_argument('--epochs', default=5, type=int)
     parser.add_argument('--predict', default=True, type=bool, help='plot ROC curve and confusion matrix')
+    parser.add_argument('--opt_auc', default=False, type=bool, help='Optimize AUC')
 
     # Model parameters
     parser.add_argument('--model', default='vit_base_patch16_224', type=str, metavar='MODEL',
@@ -186,7 +187,7 @@ def get_args_parser():
                         help='set BN layers to eval mode during finetuning.')
 
     # Dataset parameters
-    parser.add_argument('--data_root', default='/usr/local/MyObjData/flower_data', type=str,
+    parser.add_argument('--data_root', default='/mnt/d/flower_data', type=str,
                         help='dataset path')
     parser.add_argument('--data_len', default=3670, type=int,
                         help='count of your entire data_set. For example: ImageNet 1281167')
@@ -526,6 +527,8 @@ def main(args):
         Predictor(model_predict, data_loader_val, f'{args.output_dir}/{args.model}_best_checkpoint.pth', device)
         Plot_ROC(model_predict, data_loader_val, f'{args.output_dir}/{args.model}_best_checkpoint.pth', device)
 
+        if args.opt_auc:
+            OptAUC(model_predict, data_loader_val, f'{args.output_dir}/{args.model}_best_checkpoint.pth', device)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(

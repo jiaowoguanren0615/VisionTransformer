@@ -1,12 +1,14 @@
 import torch, json, os
 import seaborn as sns
-from sklearn.metrics import auc, f1_score, roc_curve, classification_report, confusion_matrix
+from sklearn.metrics import auc, f1_score, roc_curve, classification_report, confusion_matrix, roc_auc_score
 from itertools import cycle
 from numpy import interp
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 from torchvision import transforms
+from optim_AUC import OptimizeAUC
+from terminaltables import AsciiTable
 
 
 @torch.no_grad()
@@ -22,7 +24,6 @@ def Plot_ROC(net, val_loader, save_name, device):
     label_list = []
 
     net.load_state_dict(torch.load(save_name)['model'])
-
     for i, data in enumerate(val_loader):
         images, labels = data
         images, labels = images.to(device), labels.to(device)
@@ -131,7 +132,6 @@ def predict_single_image(model, device):
         class_indict = json.load(f)
 
     # load model weights
-
     assert os.path.exists('./save/checkpoint.pth'), "weight file dose not exist."
     model.load_state_dict(torch.load('./save/checkpoint.pth', map_location=device)['model'])
 
@@ -215,3 +215,44 @@ def Predictor(net, test_loader, save_name, device):
 
     clr = classification_report(y_true, y_pred, target_names=classes, digits=4)
     print("Classification Report:\n----------------------\n", clr)
+
+
+@torch.no_grad()
+def OptAUC(net, val_loader, save_name, device):
+    score_list = []
+    label_list = []
+
+    net.load_state_dict(torch.load(save_name)['model'])
+
+    for i, data in enumerate(val_loader):
+        images, labels = data
+        images, labels = images.to(device), labels.to(device)
+        outputs = torch.softmax(net(images), dim=1)
+        score_tmp = outputs
+        score_list.extend(score_tmp.detach().cpu().numpy())
+        label_list.extend(labels.detach().cpu().numpy())
+
+    score_array = np.array(score_list)
+    label_list = np.array(label_list)
+    y_preds = np.argmax(score_array, axis=1)
+    f1score = f1_score(label_list, y_preds, average='weighted') * 100
+    auc_score = roc_auc_score(label_list, score_array, average='weighted', multi_class='ovo')
+
+    opt_auc = OptimizeAUC()
+    opt_auc.fit(score_array, label_list)
+    opt_preds = opt_auc.predict(score_array)
+    opt_y_preds = np.argmax(opt_preds, axis=1)
+    opt_f1score = f1_score(label_list, opt_y_preds, average='weighted') * 100
+    opt_auc_score = roc_auc_score(label_list, opt_preds, average='weighted', multi_class='ovo')
+
+    TITLE = 'Optimize Results'
+    TABLE_DATA = (
+        ('Initial AUC', 'Initial F1-Score', 'Optimize AUC', 'Optimize F1-Score'),
+        ('{:.6f}'.format(auc_score),
+         '{:.6f}'.format(f1score),
+         '{:.6f}'.format(opt_auc_score),
+         '{:.6f}'.format(opt_f1score)
+         ),
+    )
+    table_instance = AsciiTable(TABLE_DATA, TITLE)
+    print(table_instance.table)
