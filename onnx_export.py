@@ -32,10 +32,10 @@ parser.add_argument('--model', type=str, default='vit_base_patch16_224',
                         'vit_base_patch16_224', 'vit_base_patch16_224_in21k', 'vit_base_patch32_224_in21k',
                         'vit_base_patch32_224', 'vit_large_patch16_224', 'vit_large_patch16_224_in21k',
                     ],
-                    help='model architecture (default: mobilenetv3_large_100)')
+                    help='model architecture (default: vit_base_patch16_224)')
 parser.add_argument('--checkpoint', default='./output/vit_base_patch16_224_best_checkpoint.pth', type=str, metavar='PATH',
                     help='path to checkpoint (default: none)')
-parser.add_argument('-b', '--batch-size', default=1, type=int,
+parser.add_argument('--batch-size', default=1, type=int,
                     metavar='N', help='mini-batch size (default: 1)')
 parser.add_argument('--img-size', default=224, type=int,
                     metavar='N', help='Input image dimension, uses model default if empty')
