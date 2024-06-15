@@ -431,6 +431,7 @@ def main(args):
             checkpoint = torch.load(args.resume, map_location='cpu')
         msg = model_without_ddp.load_state_dict(checkpoint['model'])
         print(msg)
+
         if not args.eval and 'optimizer' in checkpoint and 'lr_scheduler' in checkpoint and 'epoch' in checkpoint:
 
             optimizer.load_state_dict(checkpoint['optimizer'])
@@ -448,6 +449,7 @@ def main(args):
                     model_ema, checkpoint['model_ema'])
             if 'scaler' in checkpoint:
                 loss_scaler.load_state_dict(checkpoint['scaler'])
+
     if args.eval:
         # util.replace_batchnorm(model) # Users may choose whether to merge Conv-BN layers during eval
         print(f"Evaluating model: {args.model}")
@@ -515,7 +517,7 @@ def main(args):
     print('Training time {}'.format(total_time_str))
 
     # plot ROC curve and confusion matrix
-    if args.predict:
+    if args.predict and utils.is_main_process():
         model_predict = create_model(
             args.model,
             num_classes=args.nb_classes,
