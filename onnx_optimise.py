@@ -2,7 +2,7 @@
 
 Run ONNX models through the optimizer to prune unneeded nodes, fuse batchnorm layers into conv, etc.
 
-NOTE: This isn't working consistently in recent PyTorch/ONNX combos (ie PyTorch 1.6 and ONNX 1.7),
+NOTE: This isn't working consistently in recent PyTorch/ONNX combos (ie PyTorch 2.0.1 and ONNX 1.13),
 it seems time to switch to using the onnxruntime online optimizer (can also be saved for offline).
 
 Copyright 2020 Ross Wightman

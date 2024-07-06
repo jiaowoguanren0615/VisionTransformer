@@ -4,7 +4,7 @@ Export PyTorch models as ONNX graphs.
 This export script originally started as an adaptation of code snippets found at
 https://pytorch.org/tutorials/advanced/super_resolution_with_onnxruntime.html
 
-The default parameters work with PyTorch 2.3 and ONNX 1.13 and produce an optimal ONNX graph
+The default parameters work with PyTorch 2.0.1 and ONNX 1.13 and produce an optimal ONNX graph
 for hosting in the ONNX runtime (see onnx_validate.py). To export an ONNX model compatible
 """
 
