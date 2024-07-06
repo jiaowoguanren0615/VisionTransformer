@@ -9,10 +9,26 @@ from PIL import Image
 from torchvision import transforms
 from optim_AUC import OptimizeAUC
 from terminaltables import AsciiTable
+from typing import Iterable
 
 
 @torch.inference_mode()
-def Plot_ROC(net, val_loader, save_name, device):
+def Plot_ROC(net: torch.nn.Module, val_loader: Iterable, save_name: str, device: torch.device):
+    """
+        Plot ROC Curve
+
+        Save the roc curve as an image file in the current directory
+
+        Args:
+            net (torch.nn.Module): The model to be evaluated.
+            val_loader (Iterable): The data loader for the valid data.
+            save_name (str): The file path of your model weights
+            device (torch.device): The device used for training (CPU or GPU).
+
+        Returns:
+            None
+    """
+
     try:
         json_file = open('./classes_indices.json', 'r')
         class_indict = json.load(json_file)
@@ -24,6 +40,7 @@ def Plot_ROC(net, val_loader, save_name, device):
     label_list = []
 
     net.load_state_dict(torch.load(save_name)['model'])
+
     for i, data in enumerate(val_loader):
         images, labels = data
         images, labels = images.to(device), labels.to(device)
@@ -33,7 +50,7 @@ def Plot_ROC(net, val_loader, save_name, device):
         label_list.extend(labels.cpu().numpy())
 
     score_array = np.array(score_list)
-    # 将label转换成onehot形式
+    # convert label to one-hot form
     label_tensor = torch.tensor(label_list)
     label_tensor = label_tensor.reshape((label_tensor.shape[0], 1))
     label_onehot = torch.zeros(label_tensor.shape[0], len(class_indict.keys()))
@@ -43,7 +60,7 @@ def Plot_ROC(net, val_loader, save_name, device):
     print("score_array:", score_array.shape)  # (batchsize, classnum)
     print("label_onehot:", label_onehot.shape)  # torch.Size([batchsize, classnum])
 
-    # 调用sklearn库，计算每个类别对应的fpr和tpr
+    # compute tpr and fpr for each label by using sklearn lib
     fpr_dict = dict()
     tpr_dict = dict()
     roc_auc_dict = dict()
@@ -69,7 +86,7 @@ def Plot_ROC(net, val_loader, save_name, device):
     tpr_dict["macro"] = mean_tpr
     roc_auc_dict["macro"] = auc(fpr_dict["macro"], tpr_dict["macro"])
 
-    # 绘制所有类别平均的roc曲线
+    # plot roc curve for each label
     plt.figure(figsize=(12, 12))
     lw = 2
 
@@ -101,7 +118,20 @@ def Plot_ROC(net, val_loader, save_name, device):
 
 
 @torch.inference_mode()
-def predict_single_image(model, device):
+def predict_single_image(model: torch.nn.Module, device: torch.device):
+    """
+        Predict Single Image.
+
+        Save the prediction as an image file which including pred label and prob in the current directory
+
+        Args:
+            model (torch.nn.Module): The model to be evaluated.
+            device (torch.device): The device used for training (CPU or GPU).
+
+        Returns:
+            None
+    """
+
     data_transform = {
         'train': transforms.Compose([transforms.RandomResizedCrop(224), transforms.ToTensor(),
                                      transforms.RandomHorizontalFlip(),
@@ -132,6 +162,7 @@ def predict_single_image(model, device):
         class_indict = json.load(f)
 
     # load model weights
+
     assert os.path.exists('./save/checkpoint.pth'), "weight file dose not exist."
     model.load_state_dict(torch.load('./save/checkpoint.pth', map_location=device)['model'])
 
@@ -153,7 +184,27 @@ def predict_single_image(model, device):
 
 
 @torch.inference_mode()
-def Predictor(net, test_loader, save_name, device):
+def Predictor(net: torch.nn.Module, test_loader: Iterable, save_name: str, device: torch.device):
+    """
+        Evaluate the performance of the model on the given dataset.
+
+        1. This function will print the following metrics:
+            - F1 score
+            - Confusion matrix
+            - Classification report
+
+        2. Save the confusion matrix as an image file in the current directory.
+
+        Args:
+            net (torch.nn.Module): The model to be evaluated.
+            test_loader (Iterable): The data loader for the valid data.
+            save_name (str): The file path of your model weights
+            device (torch.device): The device used for training (CPU or GPU).
+
+        Returns:
+            None
+    """
+
     try:
         json_file = open('./classes_indices.json', 'r')
         class_indict = json.load(json_file)
@@ -218,7 +269,35 @@ def Predictor(net, test_loader, save_name, device):
 
 
 @torch.inference_mode()
-def OptAUC(net, val_loader, save_name, device):
+def OptAUC(net: torch.nn.Module, val_loader: Iterable, save_name: str, device: torch.device):
+    """
+        Optimize model for improving AUC
+
+        Print a table of initial and optimized AUC and F1-score.
+
+        This function takes the initial and optimized AUC and F1-score, and generates
+        an ASCII table to display the results. The table will have the following format:
+
+        Optimize Results
+        +----------------------+----------------------+----------------------+----------------------+
+        | Initial AUC          | Initial F1-Score     | Optimize AUC         | Optimize F1-Score    |
+        +----------------------+----------------------+----------------------+----------------------+
+        | 0.654321             | 0.654321             | 0.876543             | 0.876543            |
+        +----------------------+----------------------+----------------------+----------------------+
+
+        The optimized AUC and F1-score are obtained by using the `OptimizeAUC` class, which
+        performs optimization on the initial metrics.
+
+        Args:
+            net (torch.nn.Module): The model to be evaluated.
+            test_loader (Iterable): The data loader for the valid data.
+            save_name (str): The file path of your model weights
+            device (torch.device): The device used for training (CPU or GPU).
+
+        Returns:
+            None
+    """
+
     score_list = []
     label_list = []
 
