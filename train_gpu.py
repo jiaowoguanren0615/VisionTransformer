@@ -188,13 +188,13 @@ def get_args_parser():
 
     # Dataset parameters
     parser.add_argument('--data_root', default='/mnt/d/flower_data', type=str,
-                        help='dataset path')
+                        help='datasets path')
     parser.add_argument('--data_len', default=3670, type=int,
                         help='count of your entire data_set. For example: ImageNet 1281167')
     parser.add_argument('--nb_classes', default=5, type=int,
-                        help='number classes of your dataset')
+                        help='number classes of your datasets')
     parser.add_argument('--data-set', default='IMNET', choices=['CIFAR', 'IMNET', 'INAT', 'INAT19'],
-                        type=str, help='Image Net dataset path')
+                        type=str, help='Image Net datasets path')
     parser.add_argument('--inat-category', default='name',
                         choices=['kingdom', 'phylum', 'class', 'order',
                                  'supercategory', 'family', 'genus', 'name'],
@@ -269,7 +269,7 @@ def main(args):
             )
         if args.dist_eval:
             if len(dataset_val) % num_tasks != 0:
-                print('Warning: Enabling distributed evaluation with an eval dataset not divisible by process number. '
+                print('Warning: Enabling distributed evaluation with an eval datasets not divisible by process number. '
                       'This will slightly alter validation results as extra duplicate entries are added to achieve '
                       'equal num of samples per-process.')
             sampler_val = torch.utils.data.DistributedSampler(

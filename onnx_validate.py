@@ -17,7 +17,7 @@ from datasets import MyDataset, build_transform, read_split_data
 
 parser = argparse.ArgumentParser(description='Pytorch ONNX Validation')
 parser.add_argument('--data_root', default='/mnt/d/flower_data', type=str,
-                    help='path to dataset')
+                    help='path to datasets')
 parser.add_argument('--onnx-input', default='./vit_base_patch16_224_optim.onnx', type=str, metavar='PATH',
                     help='path to onnx model/weights file')
 parser.add_argument('--onnx-output-opt', default='', type=str, metavar='PATH',
@@ -31,9 +31,9 @@ parser.add_argument('--batch-size', default=16, type=int,
 parser.add_argument('--img-size', default=224, type=int,
                     metavar='N', help='Input image dimension, uses model default if empty')
 parser.add_argument('--mean', type=float, nargs='+', default=None, metavar='MEAN',
-                    help='Override mean pixel value of dataset')
+                    help='Override mean pixel value of datasets')
 parser.add_argument('--std', type=float,  nargs='+', default=None, metavar='STD',
-                    help='Override std deviation of of dataset')
+                    help='Override std deviation of of datasets')
 parser.add_argument('--crop-pct', type=float, default=None, metavar='PCT',
                     help='Override default crop pct of 0.875')
 parser.add_argument('--interpolation', default='', type=str, metavar='NAME',

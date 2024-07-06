@@ -11,7 +11,7 @@ from optim_AUC import OptimizeAUC
 from terminaltables import AsciiTable
 
 
-@torch.no_grad()
+@torch.inference_mode()
 def Plot_ROC(net, val_loader, save_name, device):
     try:
         json_file = open('./classes_indices.json', 'r')
@@ -100,7 +100,7 @@ def Plot_ROC(net, val_loader, save_name, device):
     # plt.show()
 
 
-@torch.no_grad()
+@torch.inference_mode()
 def predict_single_image(model, device):
     data_transform = {
         'train': transforms.Compose([transforms.RandomResizedCrop(224), transforms.ToTensor(),
@@ -152,7 +152,7 @@ def predict_single_image(model, device):
     # plt.show()
 
 
-@torch.no_grad()
+@torch.inference_mode()
 def Predictor(net, test_loader, save_name, device):
     try:
         json_file = open('./classes_indices.json', 'r')
@@ -217,7 +217,7 @@ def Predictor(net, test_loader, save_name, device):
     print("Classification Report:\n----------------------\n", clr)
 
 
-@torch.no_grad()
+@torch.inference_mode()
 def OptAUC(net, val_loader, save_name, device):
     score_list = []
     label_list = []

@@ -51,7 +51,7 @@ def read_split_data(root, plot_image=False):
     Lseries = pd.Series(labels, name='labels')
     df = pd.concat([Fseries, Lseries], axis=1)
 
-    print(f'{len(df.labels.unique())} kind of images were found in the dataset')
+    print(f'{len(df.labels.unique())} kind of images were found in the datasets')
     train_df, test_df = train_test_split(df, train_size=.8, shuffle=True, random_state=123, stratify=df['labels'])
 
     train_image_path = train_df['filepaths'].tolist()
@@ -76,7 +76,7 @@ def read_split_data(root, plot_image=False):
     have = int(ht / count)
     wave = int(wt / count)
     aspect_ratio = have / wave
-    print('{} images were found in the dataset.\n{} for training, {} for validation'.format(
+    print('{} images were found in the datasets.\n{} for training, {} for validation'.format(
         sum(every_class_num), len(train_image_path), len(val_image_path)
     ))
     print('average image height= ', have, '  average image width= ', wave, ' aspect ratio h/w= ', aspect_ratio)

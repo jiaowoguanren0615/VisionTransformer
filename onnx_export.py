@@ -23,7 +23,7 @@ parser = argparse.ArgumentParser(description='PyTorch ONNX Deployment')
 parser.add_argument('--output', metavar='ONNX_FILE', default=None, type=str,
                     help='output model filename')
 
-# Model & dataset params
+# Model & datasets params
 parser.add_argument('--model', type=str, default='vit_base_patch16_224',
                     choices=[
                         'vit_e_patch14_224_in21k', 'vit_Giant_patch14_224_in21k', 'vit_giant_patch14_224_in21k',
@@ -40,7 +40,7 @@ parser.add_argument('--batch-size', default=1, type=int,
 parser.add_argument('--img-size', default=224, type=int,
                     metavar='N', help='Input image dimension, uses model default if empty')
 parser.add_argument('--nb-classes', type=int, default=5,
-                    help='Number classes in dataset')
+                    help='Number classes in datasets')
 
 parser.add_argument('--opset', type=int, default=10,
                     help='ONNX opset to use (default: 10)')
@@ -51,9 +51,9 @@ parser.add_argument('--aten-fallback', action='store_true', default=False,
 parser.add_argument('--dynamic-size', action='store_true', default=False,
                     help='Export model width dynamic width/height. Not recommended for "tf" models with SAME padding.')
 parser.add_argument('--mean', type=float, nargs='+', default=None, metavar='MEAN',
-                    help='Override mean pixel value of dataset')
+                    help='Override mean pixel value of datasets')
 parser.add_argument('--std', type=float,  nargs='+', default=None, metavar='STD',
-                    help='Override std deviation of of dataset')
+                    help='Override std deviation of of datasets')
 
 
 

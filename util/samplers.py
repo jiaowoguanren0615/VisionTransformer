@@ -6,7 +6,7 @@ import math
 
 
 class RASampler(torch.utils.data.Sampler):
-    """Sampler that restricts data loading to a subset of the dataset for distributed,
+    """Sampler that restricts data loading to a subset of the datasets for distributed,
     with repeated augmentation.
     It ensures that different each augmented version of a sample will be visible to a
     different process (GPU)
@@ -31,7 +31,7 @@ class RASampler(torch.utils.data.Sampler):
         self.epoch = 0
         self.num_samples = int(math.ceil(len(self.dataset) * self.num_repeats / self.num_replicas))
         self.total_size = self.num_samples * self.num_replicas
-        # self.num_selected_samples = int(math.ceil(len(self.dataset) / self.num_replicas))
+        # self.num_selected_samples = int(math.ceil(len(self.datasets) / self.num_replicas))
         self.num_selected_samples = int(math.floor(len(self.dataset) // 256 * 256 / self.num_replicas))
         self.shuffle = shuffle
 

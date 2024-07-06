@@ -33,7 +33,7 @@ def resolve_data_config(model, args, default_cfg={}, verbose=True):
     elif 'interpolation' in default_cfg:
         new_config['interpolation'] = default_cfg['interpolation']
 
-    # resolve dataset + model mean for normalization
+    # resolve datasets + model mean for normalization
     new_config['mean'] = IMAGENET_DEFAULT_MEAN
     if args.mean is not None:
         mean = tuple(args.mean)
@@ -45,7 +45,7 @@ def resolve_data_config(model, args, default_cfg={}, verbose=True):
     elif 'mean' in default_cfg:
         new_config['mean'] = default_cfg['mean']
 
-    # resolve dataset + model std deviation for normalization
+    # resolve datasets + model std deviation for normalization
     new_config['std'] = IMAGENET_DEFAULT_STD
     if args.std is not None:
         std = tuple(args.std)
@@ -65,7 +65,7 @@ def resolve_data_config(model, args, default_cfg={}, verbose=True):
         new_config['crop_pct'] = default_cfg['crop_pct']
 
     if verbose:
-        print('Data processing configuration for current model + dataset:')
+        print('Data processing configuration for current model + datasets:')
         for n, v in new_config.items():
             print('\t%s: %s' % (n, str(v)))
 
