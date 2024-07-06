@@ -285,7 +285,7 @@ def OptAUC(net: torch.nn.Module, val_loader: Iterable, save_name: str, device: t
         | 0.654321             | 0.654321             | 0.876543             | 0.876543            |
         +----------------------+----------------------+----------------------+----------------------+
 
-        The optimized AUC and F1-score are obtained by using the `OptimizeAUC` class, which
+        The optimized AUC and F1-score are obtained by using the `OptimizeAUC` class (in ./optim_AUC.py), which
         performs optimization on the initial metrics.
 
         Args:

@@ -104,17 +104,17 @@ On the second machine: python -m torch.distributed.run --nproc_per_node=1 --nnod
 ## ONNX deployment
 ### step 1: ONNX export (modify the param of ___output___, ___model___ and ___checkpoint___)  
 ```bash
-python onnx_export.py --model='vit_base_patch16_224' --output='./vit_base_patch16_224.onnx' --checkpoint='./output/vit_base_patch16_224_best_checkpoint.pth'
+python onnx_export.py --model=vit_base_patch16_224 --output=./vit_base_patch16_224.onnx --checkpoint=./output/vit_base_patch16_224_best_checkpoint.pth
 ```
 
 ### step2: ONNX optimise
 ```bash
-python onnx_optimise.py --model='vit_base_patch16_224' --output='./vit_base_patch16_224_optim.onnx'
+python onnx_optimise.py --model=vit_base_patch16_224 --output=./vit_base_patch16_224_optim.onnx
 ```
 
 ### step3: ONNX validate (modify the param of ___data_root___ and ___onnx-input___)  
 ```bash
-python onnx_validate.py --data_root='/mnt/d/flower_data' --onnx-input='./vit_base_patch16_224_optim.onnx'
+python onnx_validate.py --data_root=/mnt/d/flower_data --onnx-input=./vit_base_patch16_224_optim.onnx
 ```
 
 
